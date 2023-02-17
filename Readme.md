@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Светлана Пономарёва](https://up.htmlacademy.ru/javascript/28/user/2045035).
-* Наставник: `Неизвестно`.
+* Наставник: [Arthur Litovko].(https://htmlacademy.ru/profile/id6927)
 
 ---
 
