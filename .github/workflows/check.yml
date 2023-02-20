@@ -7,11 +7,11 @@ on:
 
 name: Project check
 jobs:
-  setup:
-    name: Setup
+  check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: Checkout 🛎️
       uses: actions/checkout@v3
 
     - name: Set up Node.js
@@ -21,25 +21,24 @@ jobs:
       with:
         version: 7
 
-    - name: Install dependencies
+    - name: Install dependencies 📦
       run: |
         pnpm i
 
-  linting:
-    name: Linting
-    needs: setup
-    steps:
-      run: pnpm lint
+    - name: Linting 🧹
+      run: |
+        pnpm lint
 
-  test:
-    name: Testing
-    needs: setup
-    steps:
-      run: pnpm test:once
+    - name: Test 🧪
+      run: |
+        pnpm test:once
 
-  build:
-    name: build
-    needs: setup
-    steps:
-      run: pnpm build
+    - name: build 🏗
+      run: |
+        pnpm build
 
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: build
+        branch: deploy
