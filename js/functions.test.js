@@ -7,12 +7,13 @@ const emptyFunction = () => {};
 
 describe('Функция для проверки длины строки.', () => {
   const TEST_LENGTH_STRING = 'проверяемая строка';
+  const DESCRIPTION = ['больше', 'равна', 'меньше'];
+  const EXPECTED = [true, true, false];
+  const MAX_LENGTH = [20, 18, 16];
 
-  it('Длина строки меньше максимальной', () => expect(emptyFunction(TEST_LENGTH_STRING, 20)).toBe(true));
-
-  it('Длина строки равна максимальной', () => expect(emptyFunction(TEST_LENGTH_STRING, 18)).toBe(true));
-
-  it('Длина строки меньше максимальной', () => expect(emptyFunction(TEST_LENGTH_STRING, 18)).toBe(true));
+  MAX_LENGTH.forEach((maxLength, index) =>
+    it(`Длина строки ${DESCRIPTION[index]} максимальной`, () => expect(emptyFunction(TEST_LENGTH_STRING, maxLength)).toBe(EXPECTED[index]))
+  );
 });
 
 describe('Функция для проверки, является ли строка палиндромом.', () => {
