@@ -11,18 +11,34 @@ jobs:
     name: Check
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+
     - name: Set up Node.js
-      uses: actions/setup-node@v1
+      uses: volta-cli/action@v3
+
+    - uses: pnpm/action-setup@v2
       with:
-        node-version: '16'
+        version: 7
 
-    - uses: actions/checkout@master
-      name: Checkout
-
-    - name: Install dependencies
+    - name: Install dependencies 📦
       run: |
-        npm install
+        pnpm i
 
-    - name: Run checks
+    - name: Linting 🧹
       run: |
-        npm run lint
+        pnpm lint
+
+    - name: Test 🧪
+      run: |
+        pnpm test:once
+
+    - name: build 🏗
+      run: |
+        pnpm build
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: build
+        branch: deploy
