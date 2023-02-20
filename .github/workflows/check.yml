@@ -11,18 +11,24 @@ jobs:
     name: Check
     runs-on: ubuntu-latest
     steps:
-    - name: Set up Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '16'
+    - name: Checkout
+      uses: actions/checkout@v3
 
-    - uses: actions/checkout@master
-      name: Checkout
+    - name: Set up Node.js
+      uses: volta-cli/action@v3
+
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 7
 
     - name: Install dependencies
       run: |
-        npm install
+        pnpm i
 
-    - name: Run checks
+    - name: Linting
       run: |
-        npm run lint
+        pnpm lint
+
+    - name: Test
+      run: |
+        pnpm test:once
