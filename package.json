@@ -22,7 +22,8 @@
     "build": "vite build --outDir build",
     "preview": "vite preview --outDir build",
     "lint": "eslint js/",
-    "test": "vitest --dir js"
+    "test": "vitest --dir js",
+    "test:once": "vitest run --dir js"
   },
   "volta": {
     "node": "18.14.1"

@@ -7,8 +7,8 @@ on:
 
 name: Project check
 jobs:
-  check:
-    name: Check
+  setup:
+    name: Setup
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -25,10 +25,21 @@ jobs:
       run: |
         pnpm i
 
-    - name: Linting
-      run: |
-        pnpm lint
+  linting:
+    name: Linting
+    needs: setup
+    steps:
+      run: pnpm lint
 
-    - name: Test
-      run: |
-        pnpm test:once
+  test:
+    name: Testing
+    needs: setup
+    steps:
+      run: pnpm test:once
+
+  build:
+    name: build
+    needs: setup
+    steps:
+      run: pnpm build
+
