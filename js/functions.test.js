@@ -6,71 +6,36 @@ import { describe, expect, it } from 'vitest';
 const EMPTY_FUNCTION = () => {};
 
 describe.todo('Функция для проверки длины строки.', () => {
-	const Option = {
-		STRING: 'проверяемая строка',
-		DESCRIPTIONS: ['больше', 'равна', 'меньше'],
-		EXPECTATIONS: [true, true, false],
-		LENGTHS: [20, 18, 16],
-	};
+	const TEST_STRING = 'проверяемая строка';
+	const { length } = TEST_STRING;
 
-	for (let i = 0; i < Option.LENGTHS.length; i++) {
-		it(`Длина строки ${Option.DESCRIPTIONS[i]} максимальной`, () => expect(EMPTY_FUNCTION(Option.STRING, Option.LENGTHS[i])).toBe(Option.EXPECTATIONS[i]));
-	}
+	it('Длина строки меньше второго аргумента', () => expect(EMPTY_FUNCTION(TEST_STRING, length + 1)).toBe(true));
+	it('Длина строки равна второму аргументу', () => expect(EMPTY_FUNCTION(TEST_STRING, length)).toBe(true));
+	it('Длина строки больше второго аргумента', () => expect(EMPTY_FUNCTION(TEST_STRING, length - 1)).toBe(false));
 });
 
 describe.todo('Функция для проверки, является ли строка палиндромом.', () => {
-	const Option = {
-		DESCRIPTIONS: ['Строка является палиндромом', 'Палиндром с разным регистром', 'Не палиндром', 'Палиндром с пробелами'],
-		STRINGS: ['топот', 'ДовОд', 'Кекс', 'Лёша на полке клопа нашёл '],
-		EXPECTATIONS: [true, true, false, true],
-	};
-
-	for (let i = 0; i < Option.STRINGS.length; i++) {
-		it(Option.DESCRIPTIONS[i], () => expect(EMPTY_FUNCTION(Option.STRINGS[i])).toBe(Option.EXPECTATIONS[i]));
-	}
+	it('Строка является палиндромом', () => expect(EMPTY_FUNCTION('топот')).toBe(true));
+	it('Палиндром с разным регистром', () => expect(EMPTY_FUNCTION('ДовОд')).toBe(true));
+	it('Не палиндром', () => expect(EMPTY_FUNCTION('Кекс')).toBe(false));
+	it('Палиндром с пробелами', () => expect(EMPTY_FUNCTION('Лёша на полке клопа нашёл ')).toBe(true));
 });
 
 describe.todo('Функция для извлечения цифр из строки.', () => {
-	const Option = {
-		DESCRIPTIONS: [
-			'Строка содержит цифры в начале',
-			'Строка содержит цифры в конце',
-			'Строка содержит цифры в разных местах, нужно конкетинировать',
-			'Строка содержит цифры с нулями впереди. Нужно опустить нули, преобразив в число.',
-			'Строка не содержит цифр',
-			'Число вернет число',
-			'Дробное число',
-			'Отрицательное число',
-		],
-		STRINGS: ['2023 год', 'ECMAScript 2022', '1 кефир, 0.5 батона', 'агент 007', 'а я томат', 2023, 1.5, -1],
-		EXPECTATIONS: [2023, 2022, 105, 7, NaN, 2023, 15, 1],
-	};
-
-	for (let i = 0; i < Option.STRINGS.length; i++) {
-		it(Option.DESCRIPTIONS[i], () => expect(EMPTY_FUNCTION(Option.STRINGS[i])).toBe(Option.EXPECTATIONS[i]));
-	}
+	it('Строка содержит цифры в начале', () => expect(EMPTY_FUNCTION('2023 год')).toBe(2023));
+	it('Строка содержит цифры в конце', () => expect(EMPTY_FUNCTION('ECMAScript 2022')).toBe(2022));
+	it('Строка содержит цифры в разных местах, нужно конкетинировать', () => expect(EMPTY_FUNCTION('1 кефир, 0.5 батона')).toBe(105));
+	it('Строка содержит цифры с нулями впереди. Нужно опустить нули, преобразив в число.', () => expect(EMPTY_FUNCTION('агент 007')).toBe(7));
+	it('Строка не содержит цифр', () => expect(EMPTY_FUNCTION('а я томат')).toBeNaN());
+	it('Число вернет число', () => expect(EMPTY_FUNCTION(2023)).toBe(2023));
+	it('Дробное число', () => expect(EMPTY_FUNCTION(1.5)).toBe(15));
+	it('Отрицательное число', () => expect(EMPTY_FUNCTION(-1)).toBe(1));
 });
 
 describe.todo('Функция для добавления символов в строку.', () => {
-	const Option = {
-		DESCRIPTIONS: [
-			'Добавочный символ использован один раз',
-			'Добавочный символ использован три раза',
-			'Добавочные символы обрезаны с конца',
-			'Добавочные символы использованы полтора раза',
-			'Добавочные символы не использованы, исходная строка не изменена',
-		],
-		ARGUMENTS: [
-			['1', 2, '0'],
-			['1', 4, '0'],
-			['q', 4, 'werty'],
-			['q', 4, 'we'],
-			['qwerty', 4, '0'],
-		],
-		EXPECTATIONS: ['01', '0001', 'werq', 'wweq', 'qwerty'],
-	};
-
-	for (let i = 0; i < Option.EXPECTATIONS.length; i++) {
-		it(Option.DESCRIPTIONS[i], () => expect(EMPTY_FUNCTION(...Option.ARGUMENTS[i])).toBe(Option.EXPECTATIONS[i]));
-	}
+	it('Добавочный символ использован один раз', () => expect(EMPTY_FUNCTION('1', 2, '0')).toBe('01'));
+	it('Добавочный символ использован три раза', () => expect(EMPTY_FUNCTION('1', 4, '0')).toBe('0001'));
+	it('Добавочные символы обрезаны с конца', () => expect(EMPTY_FUNCTION('q', 4, 'werty')).toBe('werq'));
+	it('Добавочные символы использованы полтора раза', () => expect(EMPTY_FUNCTION('q', 4, 'we')).toBe('wweq'));
+	it('Добавочные символы не использованы, исходная строка не изменена', () => expect(EMPTY_FUNCTION('qwerty', 4, '0')).toBe('qwerty'));
 });
