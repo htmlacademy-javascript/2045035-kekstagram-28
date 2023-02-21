@@ -19,8 +19,8 @@
   "license": "MIT",
   "scripts": {
     "start": "vite",
-    "build": "vite build --outDir build",
-    "preview": "vite preview --outDir build",
+    "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint js/",
     "test": "vitest --dir js",
     "test:once": "vitest run --dir js"
