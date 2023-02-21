@@ -8,7 +8,7 @@ on:
 name: Project check
 jobs:
   set-up:
-    name: Set Up
+    name: Linting
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️
@@ -18,22 +18,21 @@ jobs:
       uses: pnpm/action-setup@v2
       with:
         version: 7
-
-    - uses: actions/setup-node@v3
-
-    - run: echo {{ volta.node }}
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        cache: 'pnpm'
+        
     - run: node -v
     - run: pnpm -v
-      # with:
-      #   node-version: '14'
-      #   cache: 'pnpm'
+        
+    - name: Install dependencies 📦
+      run: pnpm i --frozen-lockfile
 
-    # - name: Set up Node.js
-    #   uses: volta-cli/action@v3
 
-# - name: Install dependencies 📦
-#   run: |
-#     pnpm i
+
+
 
 # linting:
 #   name: Linting 🧹
