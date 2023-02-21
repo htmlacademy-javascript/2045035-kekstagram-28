@@ -18,42 +18,21 @@ jobs:
       uses: pnpm/action-setup@v2
       with:
         version: 7
-        
+
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         cache: 'pnpm'
-        
+
     - name: Install dependencies 📦
       run: pnpm i --frozen-lockfile
-      
+
     - name: Linting 🧹
       run:  pnpm lint
 
     - name: Test 🧪
       run:  pnpm test:once
 
-
-  deploy:
-    name: Build & Deploy
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v3
-
-    - name: Package manager
-      uses: pnpm/action-setup@v2
-      with:
-        version: 7
-        
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        cache: 'pnpm'
-        
-    - name: Install dependencies 📦
-      run: pnpm i --frozen-lockfile
-      
     - name: Build 🏗
       run: pnpm build
 
