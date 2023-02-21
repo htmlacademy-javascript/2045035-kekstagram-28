@@ -8,7 +8,7 @@ on:
 name: Project check
 jobs:
   set-up:
-    name: Lint & Test
+    name: Set Up
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️
