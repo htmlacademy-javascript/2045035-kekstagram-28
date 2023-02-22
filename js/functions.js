@@ -70,7 +70,6 @@ for (const string of TEST_NUMBER_DATA) {
   concatNumber(string);
 }
 
-
 /**
  * Функция, которая принимает три параметра:
  * исходную строку, минимальную длину и строку с добавочными символами —
@@ -78,14 +77,12 @@ for (const string of TEST_NUMBER_DATA) {
  * Символы добавляются в начало строки.
  * Если исходная строка превышает заданную длину, она не должна обрезаться.
  * Если «добивка» слишком длинная, она обрезается с конца.
-
- * @param {string originalString
+ *
+ * @param {string} originalString
  * @param {number} minLength
  * @param {string} addedString
- * @returns
  *
  * @example
- * addString('1', 2, '0');      // '01' // Добавочный символ использован один раз
  * addString('1', 4, '0');      // '0001' // Добавочный символ использован три раза
  * addString('q', 4, 'werty');  // 'werq' // Добавочные символы обрезаны с конца
  * addString('q', 4, 'we');     // 'wweq' // Добавочные символы использованы полтора раза
