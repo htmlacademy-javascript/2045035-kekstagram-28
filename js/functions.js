@@ -1,6 +1,12 @@
 const TEST_STRING = 'проверяемая строка';
 const TEST_NUMBER_DATA = ['2023 год', 'ECMAScript 2022', '1 кефир, 0.5 батона', 'агент 007', 'а я томат', 2023, -1, 1.5];
-const TEST_ADD_STRING_DATA = [['1', 2, '0'], ['1', 4, '0'], ['q', 4, 'werty'], ['q', 4, 'we'], ['qwerty', 4, '0']];
+const TEST_ADD_STRING_DATA = [
+	['1', 2, '0'],
+	['1', 4, '0'],
+	['q', 4, 'werty'],
+	['q', 4, 'we'],
+	['qwerty', 4, '0'],
+];
 
 /**
  * Функция для проверки длины строки.
@@ -17,7 +23,7 @@ const TEST_ADD_STRING_DATA = [['1', 2, '0'], ['1', 4, '0'], ['q', 4, 'werty'], [
 const checkStringLength = ({ length }, maxLength = 140) => length <= maxLength;
 
 for (const length of [20, 18, 10]) {
-  checkStringLength(TEST_STRING, length);
+	checkStringLength(TEST_STRING, length);
 }
 
 /**
@@ -28,10 +34,10 @@ for (const length of [20, 18, 10]) {
  */
 
 const checkPalindrome = (input) => {
-  const normalizedInput = input.replaceAll(' ', '').toLowerCase();
-  const reversedInput = [...normalizedInput].reverse().join('');
+	const normalizedInput = input.replaceAll(' ', '').toLowerCase();
+	const reversedInput = [...normalizedInput].reverse().join('');
 
-  return normalizedInput === reversedInput;
+	return normalizedInput === reversedInput;
 };
 
 checkPalindrome('Лёша на полке клопа нашёл ');
@@ -55,19 +61,18 @@ checkPalindrome('Лёша на полке клопа нашёл ');
  */
 
 const concatNumber = (input) => {
-  input = String(input);
-  const stringWithOnlyDigits = input.replace(/\D/g, '');
+	input = String(input);
+	const stringWithOnlyDigits = input.replace(/\D/g, '');
 
-  if (stringWithOnlyDigits.length) {
-    return +stringWithOnlyDigits;
-  }
+	if (stringWithOnlyDigits.length) {
+		return +stringWithOnlyDigits;
+	}
 
-  return NaN;
+	return NaN;
 };
 
-
 for (const string of TEST_NUMBER_DATA) {
-  concatNumber(string);
+	concatNumber(string);
 }
 
 /**
@@ -89,22 +94,20 @@ for (const string of TEST_NUMBER_DATA) {
  * addString('qwerty', 4, '0'); // 'qwerty' // Добавочные символы не использованы, исходная строка не изменена
  */
 
-
 const addString = (originalString, minLength, addedString) => {
+	while (originalString.length < minLength) {
+		const remainLength = minLength - originalString.length;
 
-  while (originalString.length < minLength) {
-    const remainLength = minLength - originalString.length;
+		if (remainLength >= addedString.length) {
+			originalString = addedString + originalString;
+		} else {
+			originalString = addedString.slice(0, remainLength) + originalString;
+		}
+	}
 
-    if (remainLength >= addedString.length) {
-      originalString = addedString + originalString;
-    } else {
-      originalString = addedString.slice(0, remainLength) + originalString;
-    }
-  }
-
-  return originalString;
+	return originalString;
 };
 
 for (const pad of TEST_ADD_STRING_DATA) {
-  addString(...pad);
+	addString(...pad);
 }
