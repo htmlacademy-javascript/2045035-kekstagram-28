@@ -47,9 +47,9 @@ const createObject = () => ({
 	url: `photos/${generatePhotoId(1, OBJECTS_COUNT)}.jpg`,
 	description: getRandomArrayElement(descriptions),
 	likes: getRandomInteger(15, 200),
-	comments: createComments,
+	comments: Array.from({ length: getRandomInteger(1, 4)}, createComments),
 });
 
-// const similarObjects = Array.from({ length: OBJECTS_COUNT }, createObject);
+const similarObjects = Array.from({ length: OBJECTS_COUNT }, createObject);
 
-createObject();
+export {similarObjects};
