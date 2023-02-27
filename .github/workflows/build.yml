@@ -1,11 +1,12 @@
 on:
-  pull_request:
-    branches: '*'
+  push:
+    branches:
+      - master
 
-name: Project check
+name: Build
 jobs:
   set-up:
-    name: Set Up
+    name: Set Up & Build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout 🛎️
@@ -24,8 +25,11 @@ jobs:
     - name: Install dependencies 📦
       run: pnpm i --frozen-lockfile
 
-    - name: Linting 🧹
-      run:  pnpm lint
+    - name: Build 🏗
+      run: pnpm build
 
-    - name: Test 🧪
-      run:  pnpm test:once
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: build
+        branch: deploy
