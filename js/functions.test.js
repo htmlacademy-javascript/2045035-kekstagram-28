@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkStringLength, isPalindrome, concatNumber, addString } from './functions';
-
-const getRandomInteger = () => {};
+import { checkStringLength, isPalindrome, concatNumber, addString, getRandomInteger } from './functions';
 
 describe('Функция для проверки длины строки.', () => {
 	const TEST_STRING = 'проверяемая строка';
@@ -38,7 +36,7 @@ describe('Функция для добавления символов в стр�
 	it('Добавочные символы не использованы, исходная строка не изменена', () => expect(addString('qwerty', 4, '0')).toBe('qwerty'));
 });
 
-describe.todo('Проверка генерации рандмоных целых чисел', () => {
+describe('Проверка генерации рандмоных целых чисел', () => {
 	const START = 3;
 	const END = 20;
 

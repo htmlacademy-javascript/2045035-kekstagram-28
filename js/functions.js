@@ -68,4 +68,70 @@ const addString = (originalString, minLength, addedString) => {
 	return originalString;
 };
 
-export { checkStringLength, isPalindrome, concatNumber, addString };
+/**
+ * фунция для создания рандомного целого положительного числа
+ * @param {number} min
+ * @param {number} max
+ */
+
+function getRandomInteger(min, max) {
+	const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
+	const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
+	const result = Math.random() * (upper - lower + 1) + lower;
+
+	return Math.floor(result);
+}
+
+/**
+ * создаёт генератор id. Каждый из таких генераторов инкреметирует предыдущий
+ * @returns {number}
+ */
+
+function createIdGenerator() {
+	let lastGeneratedId = 0;
+
+	return function () {
+		lastGeneratedId += 1;
+		return lastGeneratedId;
+	};
+}
+
+/**
+ * функция для генерации рандомного неповторяющегося числа
+ * @param {number} min
+ * @param {number} max
+ */
+
+const createRandomIdFromRangeGenerator = (min, max) => {
+	const previousValues = [];
+
+	return function () {
+		let currentValue = getRandomInteger(min, max);
+		if (previousValues.length >= max - min + 1) {
+			return null;
+		}
+		while (previousValues.includes(currentValue)) {
+			currentValue = getRandomInteger(min, max);
+		}
+		previousValues.push(currentValue);
+		return currentValue;
+	};
+};
+
+/**
+ * Получить случайный элемент из массива
+ * @param {Array<Element>} elements переданный массив
+ */
+
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
+export {
+	checkStringLength,
+	isPalindrome,
+	concatNumber,
+	addString,
+	getRandomInteger,
+	getRandomArrayElement,
+	createIdGenerator,
+	createRandomIdFromRangeGenerator,
+};
