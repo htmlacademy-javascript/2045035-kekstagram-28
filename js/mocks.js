@@ -45,7 +45,7 @@ const mockComment = () => ({
 	name: getRandomArrayElement(NAMES),
 });
 
-const createObject = () => ({
+const mockPhotoData = () => ({
 	id: generateUserId(1, OBJECTS_COUNT),
 	url: `photos/${generatePhotoId(1, OBJECTS_COUNT)}.jpg`,
 	description: getRandomArrayElement(DESCRIPTIONS),
@@ -53,6 +53,6 @@ const createObject = () => ({
 	comments: Array.from({ length: getRandomInteger(1, 4)}, mockComment),
 });
 
-const similarObjects = Array.from({ length: OBJECTS_COUNT }, createObject);
+const similarMockDate = Array.from({ length: OBJECTS_COUNT }, mockPhotoData);
 
-export {similarObjects};
+export {similarMockDate as similarObjects};
