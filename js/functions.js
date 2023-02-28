@@ -5,7 +5,6 @@
  * @param {number | undefined} [maxLength=140]
  *
  */
-
 const checkStringLength = ({ length }, maxLength = 140) => length <= maxLength;
 
 /**
@@ -14,7 +13,6 @@ const checkStringLength = ({ length }, maxLength = 140) => length <= maxLength;
  * @param {string} input
  *
  */
-
 const isPalindrome = (input) => {
 	const normalizedInput = input.replaceAll(' ', '').toLowerCase();
 	const reversedInput = [...normalizedInput].reverse().join('');
@@ -27,7 +25,7 @@ const isPalindrome = (input) => {
  *и возвращает их в виде целого положительного числа.
  *
  * @param {string} input
- * @returns {number | NaN} Если в строке нет ни одной цифры, функция должна вернуть NaN
+ * @returns {number | NaN} Если в строке нет ни одной цифры, функция должна вернуть `NaN`
  */
 
 const concatNumber = (input) => {
@@ -42,18 +40,11 @@ const concatNumber = (input) => {
 };
 
 /**
- * Функция, которая принимает три параметра:
- * исходную строку, минимальную длину и строку с добавочными символами —
- * и возвращает исходную строку, дополненную указанными символами до заданной длины.
- * Символы добавляются в начало строки.
- * Если исходная строка превышает заданную длину, она не должна обрезаться.
- * Если «добивка» слишком длинная, она обрезается с конца.
- *
- * @param {string} originalString
- * @param {number} minLength
- * @param {string} addedString
+ * @param {string} originalString исходная строка
+ * @param {number} minLength минимальная длина
+ * @param {string} addedString строка с добавочными символами
+ * @returns {string} исходная строка, дополненная указанными символами до заданной длины. Символы добавляются в начало строки.
  */
-
 const addString = (originalString, minLength, addedString) => {
 	while (originalString.length < minLength) {
 		const remainLength = minLength - originalString.length;
@@ -73,35 +64,31 @@ const addString = (originalString, minLength, addedString) => {
  * @param {number} min
  * @param {number} max
  */
-
-function getRandomInteger(min, max) {
+const getRandomInteger = (min, max) => {
 	const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
 	const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
 	const result = Math.random() * (upper - lower + 1) + lower;
 
 	return Math.floor(result);
-}
+};
 
 /**
  * создаёт генератор id. Каждый из таких генераторов инкреметирует предыдущий
- * @returns {number}
  */
-
-function createIdGenerator() {
+const createIdGenerator = () => {
 	let lastGeneratedId = 0;
 
-	return function () {
+	return () => {
 		lastGeneratedId += 1;
 		return lastGeneratedId;
 	};
-}
+};
 
 /**
  * функция для генерации рандомного неповторяющегося числа
  * @param {number} min
  * @param {number} max
  */
-
 const createRandomIdFromRangeGenerator = (min, max) => {
 	const previousValues = [];
 
@@ -122,7 +109,6 @@ const createRandomIdFromRangeGenerator = (min, max) => {
  * Получить случайный элемент из массива
  * @param {Array<Element>} elements переданный массив
  */
-
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 export {

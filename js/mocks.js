@@ -14,7 +14,7 @@ const DESCRIPTIONS = [
 	'Оставлю за собой право не соответствовать вашим ожиданиям.',
 ];
 
-const COMENT_TEXTS = [
+const COMMENT_TEXTS = [
 	'Всё отлично!',
 	'В целом всё неплохо. Но не всё.',
 	'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -23,36 +23,25 @@ const COMENT_TEXTS = [
 	'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const NAMES = [
-	'Аристотель',
-	'Гамлет ',
-	'Ляля',
-	'Олимпия',
-	'Данте',
-	'Боян',
-	'Кекс',
-];
-
-const generateUserId = createIdGenerator();
-const generatePhotoId = createIdGenerator();
+const NAMES = ['Аристотель', 'Гамлет ', 'Ляля', 'Олимпия', 'Данте', 'Боян', 'Кекс'];
 
 const generateCommentIdRandom = createRandomIdFromRangeGenerator(1, 100_000);
 
 const mockComment = () => ({
 	id: generateCommentIdRandom(),
 	avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-	message: Array.from({ length: getRandomInteger(1, 2) }, () => getRandomArrayElement(COMENT_TEXTS)).join(' '),
+	message: Array.from({ length: getRandomInteger(1, 2) }, () => getRandomArrayElement(COMMENT_TEXTS)).join(' '),
 	name: getRandomArrayElement(NAMES),
 });
 
-const mockPhotoData = () => ({
-	id: generateUserId(1, OBJECTS_COUNT),
-	url: `photos/${generatePhotoId(1, OBJECTS_COUNT)}.jpg`,
+const mockPhotoData = (_, id) => ({
+	id: ++id,
+	url: `photos/${id}.jpg`,
 	description: getRandomArrayElement(DESCRIPTIONS),
 	likes: getRandomInteger(15, 200),
-	comments: Array.from({ length: getRandomInteger(1, 4)}, mockComment),
+	comments: Array.from({ length: getRandomInteger(1, 4) }, mockComment),
 });
 
-const similarMockDate = Array.from({ length: OBJECTS_COUNT }, mockPhotoData);
+const mockedPhotos = Array.from({ length: OBJECTS_COUNT }, mockPhotoData);
 
-export {similarMockDate as similarObjects};
+export { mockedPhotos };
