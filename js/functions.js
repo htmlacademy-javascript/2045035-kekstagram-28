@@ -72,7 +72,6 @@ const addString = (originalString, minLength, addedString) => {
  * фунция для создания рандомного целого положительного числа
  * @param {number} min
  * @param {number} max
- * @returns {number}
  */
 
 function getRandomInteger(min, max) {
@@ -84,7 +83,7 @@ function getRandomInteger(min, max) {
 }
 
 /**
- * фукция для генерации числа по порядку
+ * создаёт генератор id. Каждый из таких генераторов инкреметирует предыдущий
  * @returns {number}
  */
 
@@ -97,17 +96,13 @@ function createIdGenerator() {
 	};
 }
 
-const generateId = createIdGenerator();
-const generatePhotoId = createIdGenerator();
-
 /**
  * функция для генерации рандомного неповторяющегося числа
  * @param {number} min
  * @param {number} max
- * @returns {number}
  */
 
-function createRandomIdFromRangeGenerator(min, max) {
+const createRandomIdFromRangeGenerator = (min, max) => {
 	const previousValues = [];
 
 	return function () {
@@ -121,14 +116,11 @@ function createRandomIdFromRangeGenerator(min, max) {
 		previousValues.push(currentValue);
 		return currentValue;
 	};
-}
-
-const generateComentIdRandom = createRandomIdFromRangeGenerator(1,1000);
+};
 
 /**
- * функция для генерации рандомного элемента из переданного массива
- * @param {Array} elements
- * @returns {index}
+ * Получить случайный элемент из массива
+ * @param {Array<Element>} elements переданный массив
  */
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
@@ -139,8 +131,7 @@ export {
 	concatNumber,
 	addString,
 	getRandomInteger,
-	generateComentIdRandom,
-	generateId,
-	generatePhotoId,
 	getRandomArrayElement,
+	createIdGenerator,
+	createRandomIdFromRangeGenerator,
 };
