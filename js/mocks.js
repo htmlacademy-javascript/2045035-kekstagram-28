@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomArrayElement, createIdGenerator, createRandomIdFromRangeGenerator } from './functions';
+import { getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator } from './util';
 
 const OBJECTS_COUNT = 25;
 
