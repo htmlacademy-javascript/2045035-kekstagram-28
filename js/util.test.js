@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkStringLength, isPalindrome, concatNumber, addString, getRandomInteger } from './functions';
+import { checkStringLength, isPalindrome, concatNumber, addString, getRandomInteger } from './util';
 
 describe('Функция для проверки длины строки.', () => {
 	const TEST_STRING = 'проверяемая строка';
