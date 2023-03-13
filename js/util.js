@@ -111,6 +111,12 @@ const createRandomIdFromRangeGenerator = (min, max) => {
  */
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+/**
+ *
+ * @param {KeyboardEvent} evt
+ */
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 export {
 	checkStringLength,
 	isPalindrome,
@@ -120,4 +126,5 @@ export {
 	getRandomArrayElement,
 	createIdGenerator,
 	createRandomIdFromRangeGenerator,
+	isEscapeKey,
 };

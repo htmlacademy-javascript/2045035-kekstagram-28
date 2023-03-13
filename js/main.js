@@ -1,3 +1,2 @@
-import './util.js';
-import './mocks.js';
-import './sample';
+import './previews.js';
+import './full-photo.js';
