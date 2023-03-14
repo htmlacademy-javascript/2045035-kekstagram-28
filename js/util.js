@@ -117,6 +117,13 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
  */
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
+/**
+ * ищет шаблон по id и берет из него 1й элемент
+ * @param {string} id
+ * @returns {HTMLElement}
+ */
+const getTemplate = (id) => document.getElementById(id).content.firstElementChild;
+
 export {
 	checkStringLength,
 	isPalindrome,
@@ -127,4 +134,5 @@ export {
 	createIdGenerator,
 	createRandomIdFromRangeGenerator,
 	isEscapeKey,
+	getTemplate,
 };
