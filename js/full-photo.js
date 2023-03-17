@@ -12,9 +12,10 @@ const commentsCount = bigPhotoWrapper.querySelector('.comments-count');
 const commentsContainer = document.querySelector('.social__comments');
 
 const bigPhotoClose = bigPhotoWrapper.querySelector('.big-picture__cancel');
-const commentCount = bigPhotoWrapper.querySelector('.social__comment-count');
-const newCommentLoader = bigPhotoWrapper.querySelector('.comments-loader');
+const commentCount = bigPhotoWrapper.querySelector('.show-comments-count');
+// const newCommentLoader = bigPhotoWrapper.querySelector('.comments-loader');
 const documentBody = document.body;
+const commentsLoaderButton = document.querySelector('.comments-loader');
 
 const onDocumentKeydown = (evt) => {
 	if (isEscapeKey(evt)) {
@@ -26,11 +27,33 @@ const onDocumentKeydown = (evt) => {
 const renderPhotoComments = (comments) => {
 	const commentFragment = document.createDocumentFragment();
 
-	for(const comment of comments) {
+	for (const comment of comments) {
 		commentFragment.appendChild(renderComment(comment));
 	}
 
 	commentsContainer.appendChild(commentFragment);
+
+	commentsLoaderButton.classList.add('hidden');
+
+	for (let i = 5; i < comments.length; i++) {
+		commentsContainer.children[i].style.display = 'none';
+		commentsLoaderButton.classList.remove('hidden');
+	}
+
+	let showMassage = 5;
+
+	const onLoaderButtonClick = () => {
+		showMassage += 5;
+		for (let i = 0; i < showMassage; i++) {
+			commentsContainer.children[i].style.display = 'flex';
+			// if (commentsContainer.childElementCount >= i) {
+			// 	commentsLoaderButton.removeEventListener('click', onLoaderButtonClick);
+			// 	commentsLoaderButton.classList.add('hidden');
+			// }
+		}
+	};
+
+	commentsLoaderButton.addEventListener('click', onLoaderButtonClick);
 };
 
 const renderPhotoDate = (photo) => {
@@ -45,8 +68,8 @@ const renderPhotoDate = (photo) => {
 const openBigPhoto = () => {
 	bigPhotoWrapper.classList.remove('hidden');
 
-	commentCount.classList.add('hidden');
-	newCommentLoader.classList.add('hidden');
+	// commentCount.classList.add('hidden');
+	// newCommentLoader.classList.add('hidden');
 	documentBody.classList.add('modal-open');
 };
 
@@ -61,11 +84,12 @@ const onPreviewClick = (evt) => {
 
 	renderPhotoDate(photo);
 	openBigPhoto();
+	// loaderComments();
 
 	document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeBigPhoto () {
+function closeBigPhoto() {
 	bigPhotoWrapper.classList.add('hidden');
 	documentBody.classList.remove('modal-open');
 

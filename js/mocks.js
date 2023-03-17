@@ -39,7 +39,7 @@ const mockPhotoData = (_, id) => ({
 	url: `photos/${id}.jpg`,
 	description: getRandomArrayElement(DESCRIPTIONS),
 	likes: getRandomInteger(15, 200),
-	comments: Array.from({ length: getRandomInteger(1, 4) }, mockComment),
+	comments: Array.from({ length: getRandomInteger(4, 15) }, mockComment),
 });
 
 const mockedPhotos = Array.from({ length: OBJECTS_COUNT }, mockPhotoData);
