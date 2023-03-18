@@ -13,7 +13,6 @@ const commentsContainer = document.querySelector('.social__comments');
 
 const bigPhotoClose = bigPhotoWrapper.querySelector('.big-picture__cancel');
 const commentCount = bigPhotoWrapper.querySelector('.show-comments-count');
-// const newCommentLoader = bigPhotoWrapper.querySelector('.comments-loader');
 const documentBody = document.body;
 const commentsLoaderButton = document.querySelector('.comments-loader');
 
@@ -41,15 +40,22 @@ const renderPhotoComments = (comments) => {
 	}
 
 	let showMassage = 5;
+	commentCount.innerHTML = 5;
 
 	const onLoaderButtonClick = () => {
 		showMassage += 5;
+		commentCount.innerHTML = showMassage;
+
 		for (let i = 0; i < showMassage; i++) {
 			commentsContainer.children[i].style.display = 'flex';
-			// if (commentsContainer.childElementCount >= i) {
-			// 	commentsLoaderButton.removeEventListener('click', onLoaderButtonClick);
-			// 	commentsLoaderButton.classList.add('hidden');
-			// }
+
+			if (showMassage >= comments.length) {
+				commentsLoaderButton.classList.add('hidden');
+				showMassage = comments.length;
+				commentCount.innerHTML = comments.length; //не работает
+			} else {
+				commentsLoaderButton.classList.remove('hidden');
+			}
 		}
 	};
 
@@ -68,8 +74,6 @@ const renderPhotoDate = (photo) => {
 const openBigPhoto = () => {
 	bigPhotoWrapper.classList.remove('hidden');
 
-	// commentCount.classList.add('hidden');
-	// newCommentLoader.classList.add('hidden');
 	documentBody.classList.add('modal-open');
 };
 
@@ -84,7 +88,6 @@ const onPreviewClick = (evt) => {
 
 	renderPhotoDate(photo);
 	openBigPhoto();
-	// loaderComments();
 
 	document.addEventListener('keydown', onDocumentKeydown);
 };
