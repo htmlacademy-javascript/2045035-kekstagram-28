@@ -1,5 +1,5 @@
 import { mockedPhotos as photos } from './mocks.js';
-import { onPreviwClick } from './full-photo.js';
+import { onPreviewClick } from './full-photo.js';
 import { getTemplate } from './util.js';
 
 /** @type {HTMLElement} куда будем вставлять шаблон */
@@ -26,7 +26,7 @@ for (const photo of photos) {
 	const pictureElement = templatePicture.cloneNode(true);
 
 	renderThumbnail(photo, pictureElement);
-	pictureElement.addEventListener('click', onPreviwClick);
+	pictureElement.addEventListener('click', onPreviewClick);
 
 	photosFragment.appendChild(pictureElement);
 }
