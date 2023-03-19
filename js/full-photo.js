@@ -1,20 +1,14 @@
-// import { picturesContainer } from './previews.js';
 import { getPhotoByID } from './data.js';
 import { isEscapeKey } from './util.js';
-import { renderComment } from './comment.js';
-// import { mockedPhotos as photos } from './mocks.js';
+import { renderPhotoComments, clearComments } from './comment.js';
 
-const bigPhotoWrapper = document.querySelector('.big-picture');
+const documentBody = document.body;
+const bigPhotoWrapper = documentBody.querySelector('.big-picture');
 const bigPicture = bigPhotoWrapper.querySelector('.big-picture__img img');
 const bigPhotoDescription = bigPhotoWrapper.querySelector('.social__caption');
 const likesCount = bigPhotoWrapper.querySelector('.likes-count');
-const commentsCount = bigPhotoWrapper.querySelector('.comments-count');
-const commentsContainer = document.querySelector('.social__comments');
-
 const bigPhotoClose = bigPhotoWrapper.querySelector('.big-picture__cancel');
-const commentCount = bigPhotoWrapper.querySelector('.social__comment-count');
-const newCommentLoader = bigPhotoWrapper.querySelector('.comments-loader');
-const documentBody = document.body;
+
 
 const onDocumentKeydown = (evt) => {
 	if (isEscapeKey(evt)) {
@@ -23,31 +17,18 @@ const onDocumentKeydown = (evt) => {
 	}
 };
 
-const renderPhotoComments = (comments) => {
-	const commentFragment = document.createDocumentFragment();
-
-	for(const comment of comments) {
-		commentFragment.appendChild(renderComment(comment));
-	}
-
-	commentsContainer.appendChild(commentFragment);
-};
-
 const renderPhotoDate = (photo) => {
 	bigPicture.src = photo.url;
 	likesCount.textContent = photo.likes;
-	commentsCount.textContent = photo.comments.length;
 	bigPhotoDescription.textContent = photo.description;
 
 	renderPhotoComments(photo.comments);
 };
 
-const openBigPhoto = () => {
-	bigPhotoWrapper.classList.remove('hidden');
 
-	commentCount.classList.add('hidden');
-	newCommentLoader.classList.add('hidden');
-	documentBody.classList.add('modal-open');
+const changeClasses = (willBeOpened = true) => {
+	bigPhotoWrapper.classList.toggle('hidden', !willBeOpened);
+	documentBody.classList.toggle('modal-open', willBeOpened);
 };
 
 /**
@@ -60,20 +41,17 @@ const onPreviewClick = (evt) => {
 	const photo = getPhotoByID(id);
 
 	renderPhotoDate(photo);
-	openBigPhoto();
+	changeClasses(true);
 
 	document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeBigPhoto () {
-	bigPhotoWrapper.classList.add('hidden');
-	documentBody.classList.remove('modal-open');
-
+function closeBigPhoto() {
+	changeClasses(false);
 	document.removeEventListener('keydown', onDocumentKeydown);
-
-	commentsContainer.innerHTML = '';
+	clearComments();
 }
 
 bigPhotoClose.addEventListener('click', closeBigPhoto);
 
-export { onPreviewClick as onPreviwClick };
+export { onPreviewClick };
