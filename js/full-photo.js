@@ -54,4 +54,4 @@ function closeBigPhoto() {
 
 bigPhotoClose.addEventListener('click', closeBigPhoto);
 
-export { onPreviewClick };
+export { onPreviewClick, onDocumentKeydown };
