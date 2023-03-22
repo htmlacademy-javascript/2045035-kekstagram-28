@@ -120,7 +120,9 @@
 									<!-- Добавление хэш-тегов и комментария к изображению -->
 									<fieldset class="img-upload__text text">
 										<div class="img-upload__field-wrapper">
-											<input class="text__hashtags" type="text" name="hashtags" placeholder="#ХэшТег" />
+											<label class="text__hashtags__label">
+												<input class="text__hashtags" type="text" name="hashtags" placeholder="#ХэшТег" />
+											</label>
 										</div>
 										<div class="img-upload__field-wrapper">
 											<textarea class="text__description" name="description" minlength="0" maxlength="140" placeholder="Ваш комментарий..."></textarea>
@@ -235,7 +237,7 @@
 			</li>
 		</template>
 
-		<!-- <script src="pristine/pristine.js"></script> -->
+		<script src="/vendor/pristine/pristine.min.js"></script>
 		<script src="js/main.js" type="module"></script>
 	</body>
 </html>
