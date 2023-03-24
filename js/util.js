@@ -124,6 +124,14 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
  */
 const getTemplate = (id) => document.getElementById(id).content.firstElementChild;
 
+/**
+ * @param {Element} modalElement
+ */
+const toggleModalClasses = (modalElement, willBeOpened = true) => {
+	modalElement.classList.toggle('hidden', !willBeOpened);
+	document.body.classList.toggle('modal-open', willBeOpened);
+};
+
 export {
 	checkStringLength,
 	isPalindrome,
@@ -135,4 +143,5 @@ export {
 	createRandomIdFromRangeGenerator,
 	isEscapeKey,
 	getTemplate,
+	toggleModalClasses
 };

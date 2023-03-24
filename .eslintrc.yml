@@ -10,7 +10,6 @@ env:
 
 globals:
   noUiSlider: readonly
-  Pristine: readonly
 
 extends: "htmlacademy/vanilla"
 
