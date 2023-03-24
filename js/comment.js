@@ -3,7 +3,7 @@ import { getTemplate } from './util.js';
 const PACK_SIZE = 5;
 
 const loadButton = document.querySelector('.comments-loader');
-const countElement = document.querySelector('.social__comment-count');
+const counterElement = document.querySelector('.social__comment-count');
 const commentsContainer = document.querySelector('.social__comments');
 const templateComment = getTemplate('usersComments');
 
@@ -21,6 +21,31 @@ const renderComment = ({ avatar, name, message }) => {
 	return сommentElement;
 };
 
+const RussianPluralIntl = new Intl.PluralRules('ru-RU');
+
+/**
+ * @param {LDMLPluralRule} key
+ */
+const getCommentEnding = (key) => {
+	switch (key) {
+	case 'one':
+		return 'комментария';
+	default:
+		return 'комментариев';
+	}
+};
+
+/**
+ * @param {number} showed
+ * @param {number} all
+ */
+const updateCounterElement = (showed, all) => {
+	const pluralKey = RussianPluralIntl.select(all);
+	const ending = getCommentEnding(pluralKey);
+
+	counterElement.textContent = `${showed} из ${all} ${ending}`;
+};
+
 const onLoadButtonClick = () => {
 	const showedAmount = commentsContainer.children.length;
 	let endOfPack = showedAmount + PACK_SIZE;
@@ -36,7 +61,7 @@ const onLoadButtonClick = () => {
 	}
 	commentsContainer.appendChild(commentFragment);
 
-	countElement.textContent = `${endOfPack} из ${savedComments.length} комментариев`;
+	updateCounterElement(endOfPack, savedComments.length);
 
 	loadButton.hidden = isAllCommentsShow;
 };
@@ -50,6 +75,7 @@ const renderPhotoComments = (comments) => {
 
 const clearComments = () => {
 	commentsContainer.innerHTML = '';
+	savedComments = [];
 };
 
 export { renderPhotoComments, clearComments };
