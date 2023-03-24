@@ -1,14 +1,12 @@
 import { getPhotoByID } from './data.js';
-import { isEscapeKey } from './util.js';
+import { isEscapeKey, toggleModalClasses } from './util.js';
 import { renderPhotoComments, clearComments } from './comment.js';
 
-const documentBody = document.body;
-const bigPhotoWrapper = documentBody.querySelector('.big-picture');
+const bigPhotoWrapper = document.querySelector('.big-picture');
 const bigPicture = bigPhotoWrapper.querySelector('.big-picture__img img');
 const bigPhotoDescription = bigPhotoWrapper.querySelector('.social__caption');
 const likesCount = bigPhotoWrapper.querySelector('.likes-count');
 const bigPhotoClose = bigPhotoWrapper.querySelector('.big-picture__cancel');
-
 
 const onDocumentKeydown = (evt) => {
 	if (isEscapeKey(evt)) {
@@ -25,12 +23,6 @@ const renderPhotoDate = (photo) => {
 	renderPhotoComments(photo.comments);
 };
 
-
-const changeClasses = (willBeOpened = true) => {
-	bigPhotoWrapper.classList.toggle('hidden', !willBeOpened);
-	documentBody.classList.toggle('modal-open', willBeOpened);
-};
-
 /**
  * @param {Event} evt
  */
@@ -41,13 +33,12 @@ const onPreviewClick = (evt) => {
 	const photo = getPhotoByID(id);
 
 	renderPhotoDate(photo);
-	changeClasses(true);
-
+	toggleModalClasses(bigPhotoWrapper);
 	document.addEventListener('keydown', onDocumentKeydown);
 };
 
 function closeBigPhoto() {
-	changeClasses(false);
+	toggleModalClasses(bigPhotoWrapper, false);
 	document.removeEventListener('keydown', onDocumentKeydown);
 	clearComments();
 }
