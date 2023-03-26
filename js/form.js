@@ -1,5 +1,6 @@
 import { isEscapeKey, toggleModalClasses } from './util.js';
 import { initValidation } from './validation.js';
+import { resetScale } from './zoom.js';
 
 /** @type {HTMLFormElement} */
 const photoForm = document.querySelector('.img-upload__form');
@@ -21,6 +22,7 @@ const onDocumentKeydown = (evt) => {
 const loadNewPhotoForm = () => {
 	toggleModalClasses(photoModal);
 	document.addEventListener('keydown', onDocumentKeydown);
+	resetScale();
 };
 
 uploadFile.addEventListener('change', loadNewPhotoForm);

@@ -1,9 +1,9 @@
 import Pristine from 'pristinejs';
 
 const PRISTINE_OPTIONS = {
-	classTo: 'text__hashtags__label', //элемент в кот нужно вывести ошибку
+	classTo: 'text__hashtags__label',
 	errorTextParent: 'text__hashtags__label',
-	errorTextClass: 'hashtags__error', //класс ошибки
+	errorTextClass: 'hashtags__error',
 };
 
 const hashtagsRegExp = /^#[a-zа-яё0-9]*$/i;
