@@ -1,4 +1,5 @@
 import Pristine from 'pristinejs';
+import { photoForm, hashtagsInput } from './elements.js';
 
 const PRISTINE_OPTIONS = {
 	classTo: 'text__hashtags__label',
@@ -14,7 +15,6 @@ let errorMessage = 'Default error';
  * @param {string} value
  */
 const validateHashtags = (value) => {
-
 	if (value === '') {
 		return true;
 	}
@@ -57,25 +57,11 @@ const validateHashtags = (value) => {
 	});
 };
 
-/**
- * @param {HTMLFormElement} form
- */
-export const initValidation = (form) => {
-	const { hashtags: hashtagsInput, description } = form.elements;
+const pristine = new Pristine(photoForm, PRISTINE_OPTIONS);
 
-	const isTextFocused = () => document.activeElement === hashtagsInput || document.activeElement === description;
+pristine.addValidator(hashtagsInput, validateHashtags, () => errorMessage);
 
-	const pristine = new Pristine(form, PRISTINE_OPTIONS);
+const validate = () => pristine.validate();
+const resetValidation = () => pristine.reset();
 
-	pristine.addValidator(hashtagsInput, validateHashtags, () => errorMessage);
-
-	return {
-		isTextFocused,
-		validate() {
-			pristine.validate();
-		},
-		resetValidation() {
-			pristine.reset();
-		},
-	};
-};
+export { validate, resetValidation };
