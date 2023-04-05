@@ -1,17 +1,13 @@
 /**
  * Функция для проверки длины строки.
- *
  * @param {string} string
  * @param {number | undefined} [maxLength=140]
- *
  */
 const checkStringLength = ({ length }, maxLength = 140) => length <= maxLength;
 
 /**
  * Функция для проверки, является ли строка палиндромом
- *
  * @param {string} input
- *
  */
 const isPalindrome = (input) => {
 	const normalizedInput = input.replaceAll(' ', '').toLowerCase();
@@ -23,7 +19,6 @@ const isPalindrome = (input) => {
 /**
  *Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
  *и возвращает их в виде целого положительного числа.
- *
  * @param {string} input
  * @returns {number | NaN} Если в строке нет ни одной цифры, функция должна вернуть `NaN`
  */
@@ -60,7 +55,7 @@ const addString = (originalString, minLength, addedString) => {
 };
 
 /**
- * фунция для создания рандомного целого положительного числа
+ * функция для создания рандомного целого положительного числа
  * @param {number} min
  * @param {number} max
  */
@@ -132,6 +127,19 @@ const toggleModalClasses = (modalElement, willBeOpened = true) => {
 	document.body.classList.toggle('modal-open', willBeOpened);
 };
 
+/**
+ * @param {Element} blockElement
+ * @param {string} BEMelement
+ */
+
+const getBEMElement = (blockElement, BEMelement) => {
+	if (!blockElement.classList.length) {
+		return null;
+	}
+	const blockCSS = blockElement.classList[0];
+	return blockElement.querySelector(`.${blockCSS}__${BEMelement}`);
+};
+
 export {
 	checkStringLength,
 	isPalindrome,
@@ -143,5 +151,6 @@ export {
 	createRandomIdFromRangeGenerator,
 	isEscapeKey,
 	getTemplate,
-	toggleModalClasses
+	toggleModalClasses,
+	getBEMElement,
 };

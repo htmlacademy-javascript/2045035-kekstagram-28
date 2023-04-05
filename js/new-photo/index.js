@@ -3,8 +3,12 @@ import { validate, resetValidation } from './validation.js';
 import { resetScale } from './zoom.js';
 import { photoForm, descriptionElement, hashtagsInput } from './elements.js';
 import { resetEffects } from './effects.js';
+import { sendData } from '../api.js';
+import { showErrorMessage, showSuccessMessage } from '../alerts.js';
 
 const photoModal = photoForm.querySelector('.img-upload__overlay');
+const submitButton = photoForm.querySelector('#upload-submit');
+
 /** @type {HTMLInputElement} */
 const uploadFile = photoForm.filename;
 
@@ -35,7 +39,29 @@ photoForm.addEventListener('reset', () => {
 	resetEffects();
 });
 
+// const blockSubmitButton = () => {
+// 	submitButton.disabled = true;
+// };
+
+// const unblockSubmitButton = () => {
+// 	submitButton.disabled = false;
+// };
+
 photoForm.addEventListener('submit', (evt) => {
 	evt.preventDefault();
-	validate();
+	const isValid = validate();
+
+	if (isValid) {
+		submitButton.disabled = true;
+
+		const data = new FormData(evt.target);
+		sendData(data)
+			.then(() => {
+				closeModal();
+				showSuccessMessage();
+			})
+			.catch(() => showErrorMessage())
+			.finally(submitButton.disabled = false);
+	}
 });
+

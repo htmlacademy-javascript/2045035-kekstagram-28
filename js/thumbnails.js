@@ -1,6 +1,6 @@
-import { mockedPhotos as photos } from './mocks.js';
 import { onPreviewClick } from './full-photo.js';
 import { getTemplate } from './util.js';
+import { getData } from './api.js';
 
 /** @type {HTMLElement} куда будем вставлять шаблон */
 const picturesContainer = document.querySelector('.pictures');
@@ -8,10 +8,8 @@ const picturesContainer = document.querySelector('.pictures');
 /** @type {HTMLAnchorElement} шаблон */
 const templatePicture = getTemplate('picture');
 
-/** коробочка */
-const photosFragment = document.createDocumentFragment();
-
-const renderThumbnail = ({ url, likes, comments, id, description }, pictureElement) => {
+const renderThumbnail = ({ url, likes, comments, id, description }) => {
+	const pictureElement = templatePicture.cloneNode(true);
 	const image = pictureElement.querySelector('.picture__img');
 	image.src = url;
 	image.alt = description;
@@ -20,17 +18,20 @@ const renderThumbnail = ({ url, likes, comments, id, description }, pictureEleme
 	pictureElement.querySelector('.picture__comments').textContent = comments.length;
 
 	pictureElement.dataset.id = id;
+
+	return pictureElement;
 };
 
-for (const photo of photos) {
-	const pictureElement = templatePicture.cloneNode(true);
+const renderThumbnails = (photos) => {
+	/** коробочка */
+	const photosFragment = document.createDocumentFragment();
+	for (const photo of photos) {
+		const thumbnail = renderThumbnail(photo);
+		thumbnail.addEventListener('click', onPreviewClick);
+		photosFragment.appendChild(thumbnail);
+	}
 
-	renderThumbnail(photo, pictureElement);
-	pictureElement.addEventListener('click', onPreviewClick);
+	picturesContainer.appendChild(photosFragment);
+};
 
-	photosFragment.appendChild(pictureElement);
-}
-
-picturesContainer.appendChild(photosFragment);//достаём из коробочки
-
-// export {picturesContainer};
+getData().then(renderThumbnails);
