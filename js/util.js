@@ -1,19 +1,13 @@
-const ALERT_SHOW_TIME = 5000;
-
 /**
  * Функция для проверки длины строки.
- *
  * @param {string} string
  * @param {number | undefined} [maxLength=140]
- *
  */
 const checkStringLength = ({ length }, maxLength = 140) => length <= maxLength;
 
 /**
  * Функция для проверки, является ли строка палиндромом
- *
  * @param {string} input
- *
  */
 const isPalindrome = (input) => {
 	const normalizedInput = input.replaceAll(' ', '').toLowerCase();
@@ -25,7 +19,6 @@ const isPalindrome = (input) => {
 /**
  *Функция, которая принимает строку, извлекает содержащиеся в ней цифры от 0 до 9
  *и возвращает их в виде целого положительного числа.
- *
  * @param {string} input
  * @returns {number | NaN} Если в строке нет ни одной цифры, функция должна вернуть `NaN`
  */
@@ -62,7 +55,7 @@ const addString = (originalString, minLength, addedString) => {
 };
 
 /**
- * фунция для создания рандомного целого положительного числа
+ * функция для создания рандомного целого положительного числа
  * @param {number} min
  * @param {number} max
  */
@@ -134,25 +127,17 @@ const toggleModalClasses = (modalElement, willBeOpened = true) => {
 	document.body.classList.toggle('modal-open', willBeOpened);
 };
 
-const showAlert = (message) => {
-	const alertContainer = document.createElement('div');
-	alertContainer.style.zIndex = '100';
-	alertContainer.style.position = 'absolute';
-	alertContainer.style.left = '0';
-	alertContainer.style.top = '0';
-	alertContainer.style.right = '0';
-	alertContainer.style.padding = '10px 3px';
-	alertContainer.style.fontSize = '30px';
-	alertContainer.style.textAlign = 'center';
-	alertContainer.style.backgroundColor = 'red';
+/**
+ * @param {Element} blockElement
+ * @param {string} BEMelement
+ */
 
-	alertContainer.textContent = message;
-
-	document.body.append(alertContainer);
-
-	setTimeout(() => {
-		alertContainer.remove();
-	}, ALERT_SHOW_TIME);
+const getBEMElement = (blockElement, BEMelement) => {
+	if (!blockElement.classList.length) {
+		return null;
+	}
+	const blockCSS = blockElement.classList[0];
+	return blockElement.querySelector(`.${blockCSS}__${BEMelement}`);
 };
 
 export {
@@ -167,5 +152,5 @@ export {
 	isEscapeKey,
 	getTemplate,
 	toggleModalClasses,
-	showAlert,
+	getBEMElement,
 };

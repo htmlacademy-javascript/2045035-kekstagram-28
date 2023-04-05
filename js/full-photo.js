@@ -26,11 +26,11 @@ const renderPhotoDate = (photo) => {
 /**
  * @param {Event} evt
  */
-const onPreviewClick = (evt) => {
+const onPreviewClick = async (evt) => {
 	evt.preventDefault();
 
 	const id = parseInt(evt.currentTarget.dataset.id, 10);
-	const photo = getPhotoByID(id);
+	const photo = await getPhotoByID(id);
 
 	renderPhotoDate(photo);
 	toggleModalClasses(bigPhotoWrapper);
