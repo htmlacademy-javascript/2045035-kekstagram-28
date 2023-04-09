@@ -140,8 +140,13 @@ const getBEMElement = (blockElement, BEMelement) => {
 	return blockElement.querySelector(`.${blockCSS}__${BEMelement}`);
 };
 
-// Функция взята из интернета и доработана
-// Источник - https://www.freecodecamp.org/news/javascript-debounce-example
+
+/**
+ * Функция для создания дебаунса
+ * @param {(...args: any[]) => unknown} callback
+ * @param {number} timeoutDelay
+ * @author Функция взята из [freecodecamp](https://www.freecodecamp.org/news/javascript-debounce-example) и доработана
+ */
 function debounce(callback, timeoutDelay = 500) {
 	let timeoutId;
 

@@ -24,8 +24,10 @@ const renderThumbnail = ({ url, likes, comments, id, description }) => {
 	return pictureElement;
 };
 
+const removePhotos = () => picturesContainer.querySelectorAll('.picture').forEach((element) => element.remove());
+
 const renderThumbnails = (photos) => {
-	picturesContainer.querySelectorAll('.picture').forEach((element) => element.remove());
+	removePhotos();
 	/** коробочка */
 	const photosFragment = document.createDocumentFragment();
 
@@ -36,8 +38,6 @@ const renderThumbnails = (photos) => {
 	}
 
 	picturesContainer.appendChild(photosFragment);
-	// filter.classList.remove('img-filters--inactive');
 };
 
-// getData().then(renderThumbnails);
 export {renderThumbnails};
