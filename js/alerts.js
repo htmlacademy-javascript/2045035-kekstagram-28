@@ -10,7 +10,7 @@ const ALERT_SHOW_TIME = 5000;
 const initAlertModal = (template = successTemplate) => {
 	const modal = template.cloneNode(true);
 	const button = getBEMElement(modal, 'button');
-	document.body.append(modal);
+	document.body.appendChild(modal);
 
 	const closeModal = () => {
 		modal.removeEventListener('click', onClickOnModal);
