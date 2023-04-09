@@ -39,14 +39,6 @@ photoForm.addEventListener('reset', () => {
 	resetEffects();
 });
 
-// const blockSubmitButton = () => {
-// 	submitButton.disabled = true;
-// };
-
-// const unblockSubmitButton = () => {
-// 	submitButton.disabled = false;
-// };
-
 photoForm.addEventListener('submit', (evt) => {
 	evt.preventDefault();
 	const isValid = validate();
@@ -64,4 +56,3 @@ photoForm.addEventListener('submit', (evt) => {
 			.finally(submitButton.disabled = false);
 	}
 });
-
