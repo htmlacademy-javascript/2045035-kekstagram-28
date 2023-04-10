@@ -49,8 +49,6 @@ radiosWrapper.addEventListener('change', onRadioWrapperChange);
 effectNoUISlider.on('update', onEffectNoUISliderUpdate);
 
 export const resetEffects = () => {
-
-
 	sliderWrapper.hidden = true;
 	effectNoUISlider.updateOptions(initialSliderOptions);
 };
