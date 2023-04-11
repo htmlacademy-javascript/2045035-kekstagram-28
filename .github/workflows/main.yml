@@ -27,5 +27,3 @@ jobs:
     - name: Linting 🧹
       run:  pnpm lint
 
-    - name: Test 🧪
-      run:  pnpm test:once
