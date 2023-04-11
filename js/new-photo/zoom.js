@@ -39,7 +39,6 @@ const onIncreaseButtonClick = () => {
 	scaleImage(nextValue);
 };
 
-
 decreaseButton.addEventListener('click', onDecreaseButtonClick);
 increaseButton.addEventListener('click', onIncreaseButtonClick);
 

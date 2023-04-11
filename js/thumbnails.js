@@ -1,13 +1,11 @@
 import { onPreviewClick } from './full-photo.js';
 import { getTemplate } from './util.js';
-// import { getData } from './api.js';
 
-// const filter = document.querySelector('.img-filters');
 
-/** @type {HTMLElement} куда будем вставлять шаблон */
+/** @type {HTMLElement} */
 const picturesContainer = document.querySelector('.pictures');
 
-/** @type {HTMLAnchorElement} шаблон */
+/** @type {HTMLAnchorElement} */
 const templatePicture = getTemplate('picture');
 
 const renderThumbnail = ({ url, likes, comments, id, description }) => {
@@ -28,7 +26,7 @@ const removePhotos = () => picturesContainer.querySelectorAll('.picture').forEac
 
 const renderThumbnails = (photos) => {
 	removePhotos();
-	/** коробочка */
+
 	const photosFragment = document.createDocumentFragment();
 
 	for (const photo of photos) {

@@ -10,5 +10,4 @@ const hashtagsInput = photoForm.hashtags;
 /** @type {HTMLTextAreaElement} */
 const descriptionElement = photoForm.description;
 
-
 export {photoForm, hashtagsInput, descriptionElement, imageElement};

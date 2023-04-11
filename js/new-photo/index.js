@@ -5,6 +5,7 @@ import { photoForm, descriptionElement, hashtagsInput } from './elements.js';
 import { resetEffects } from './effects.js';
 import { sendData } from '../api.js';
 import { showErrorMessage, showSuccessMessage } from '../alerts.js';
+import { changePhoto } from '../photo.js';
 
 const photoModal = photoForm.querySelector('.img-upload__overlay');
 const submitButton = photoForm.querySelector('#upload-submit');
@@ -25,6 +26,7 @@ const onDocumentKeydown = (evt) => {
 
 const loadNewPhotoForm = () => {
 	toggleModalClasses(photoModal);
+	changePhoto(uploadFile);
 	document.addEventListener('keydown', onDocumentKeydown);
 };
 
