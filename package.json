@@ -13,23 +13,20 @@
 	"devDependencies": {
 		"eslint": "8.34.0",
 		"eslint-config-htmlacademy": "9.0.0",
-		"nouislider": "15.7.0",
-		"vite": "4.1.3",
-		"vitest": "0.28.5"
+		"vite": "4.1.3"
 	},
 	"license": "MIT",
 	"scripts": {
 		"start": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"lint": "eslint js/",
-		"test": "vitest --dir js",
-		"test:once": "vitest run --dir js"
+		"lint": "eslint js/"
 	},
 	"volta": {
 		"node": "18.14.1"
 	},
 	"dependencies": {
-		"pristinejs": "1.0.0"
+		"pristinejs": "1.0.0",
+		"nouislider": "15.7.0"
 	}
 }
