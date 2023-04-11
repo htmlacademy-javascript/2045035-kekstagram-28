@@ -2,10 +2,10 @@
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.min.css';
 
-
 /* __  Prepared options for custom slider __ */
 import {EFFECT_OPTION_MAP} from './effect-map.js';
 
+const CHANGE_EVENT = new Event('change');
 
 /* __  Looking up for DOM Elements __ */
 import { imageElement, photoForm } from './elements.js';
@@ -21,11 +21,11 @@ const effectLevelInput = photoForm['effect-level'];
 
 /* __  Initial setup __ */
 sliderWrapper.hidden = true;
-const initialSliderOptions = EFFECT_OPTION_MAP[effectsRadios.value].slider;
-const effectNoUISlider = noUiSlider.create(customSliderWrapper, initialSliderOptions);
+const effectNoUISlider = noUiSlider.create(customSliderWrapper, EFFECT_OPTION_MAP[effectsRadios.value].slider);
 
 const onRadioWrapperChange = () => {
 	/** @type {keyof EFFECT_DATA} */
+
 	const nextEffect = effectsRadios.value;
 	sliderWrapper.hidden = nextEffect === 'none';
 	imageElement.className = `effects__preview--${effectsRadios.value}`;
@@ -49,8 +49,6 @@ radiosWrapper.addEventListener('change', onRadioWrapperChange);
 effectNoUISlider.on('update', onEffectNoUISliderUpdate);
 
 export const resetEffects = () => {
-
-
-	sliderWrapper.hidden = true;
-	effectNoUISlider.updateOptions(initialSliderOptions);
+	effectsRadios[0].checked = true;
+	radiosWrapper.dispatchEvent(CHANGE_EVENT);
 };
