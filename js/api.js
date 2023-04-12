@@ -23,15 +23,17 @@ const ErrorText = {
  * @param {any} body
  */
 const load = (route, method = Method.GET, body = null) =>
-	fetch(`${BASE_URL}${route}`, { method, body })
-		.then((response) => {
-			if (!response.ok) {
-				throw new Error();
-			}
-			return response.json();
-		});
+	fetch(`${BASE_URL}${route}`, { method, body }).then((response) => {
+		if (!response.ok) {
+			throw new Error();
+		}
+		return response.json();
+	});
 
-const getData = () => load(Route.GET_DATA).catch(() => showErrorMessage({ title: ErrorText.GET_DATA, ctaCallback: () => location.reload() }));
+const getData = () =>
+	load(Route.GET_DATA).catch(() => {
+		showErrorMessage({ title: ErrorText.GET_DATA, ctaCallback: () => location.reload() });
+	});
 
 const sendData = (body) => load(Route.SEND_DATA, Method.POST, body);
 

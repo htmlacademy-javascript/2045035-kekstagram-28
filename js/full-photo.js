@@ -37,12 +37,16 @@ const onPreviewClick = async (evt) => {
 	document.addEventListener('keydown', onDocumentKeydown);
 };
 
-function closeBigPhoto() {
+const onBigPhotoCloseClick = () => {
 	toggleModalClasses(bigPhotoWrapper, false);
 	document.removeEventListener('keydown', onDocumentKeydown);
 	clearComments();
+};
+
+function closeBigPhoto() {
+	onBigPhotoCloseClick();
 }
 
-bigPhotoClose.addEventListener('click', closeBigPhoto);
+bigPhotoClose.addEventListener('click', onBigPhotoCloseClick);
 
 export { onPreviewClick, onDocumentKeydown };

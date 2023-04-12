@@ -1,6 +1,9 @@
 import Pristine from 'pristinejs';
 import { photoForm, hashtagsInput } from './elements.js';
 
+const MAX_LENGTH_HASHTAG = 20;
+const MAX_COUNT_HASHTAG = 5;
+
 const PRISTINE_OPTIONS = {
 	classTo: 'text__hashtags__label',
 	errorTextParent: 'text__hashtags__label',
@@ -21,13 +24,23 @@ const validateHashtags = (value) => {
 
 	const tags = value.trim().toLocaleLowerCase().split(' ');
 
+	if (tags.length > MAX_COUNT_HASHTAG) {
+		errorMessage = 'Нельзя указать больше пяти хэш-тегов';
+		return false;
+	}
+
+	if (tags.length !== new Set(tags).size) {
+		errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
+		return false;
+	}
+
 	return tags.every((tag) => {
 		if (tag[0] !== '#') {
 			errorMessage = 'Хэштег должен начинаться с #';
 			return false;
 		}
 
-		if (tag.length > 20) {
+		if (tag.length > MAX_LENGTH_HASHTAG) {
 			errorMessage = 'Максимальная длина одного хэш-тега 20 символов, включая решётку';
 			return false;
 		}
@@ -40,16 +53,6 @@ const validateHashtags = (value) => {
 		if (!hashtagsRegExp.test(tag)) {
 			errorMessage =
 				'Хэштег должен состоять из букв и цифр; не может содержать пробелы, спецсимволы (#, @, $ и т. п.), символы пунктуации (тире, дефис, запятая и т. п.), эмодзи и т. д.';
-			return false;
-		}
-
-		if (tags.length > 5) {
-			errorMessage = 'Нельзя указать больше пяти хэш-тегов';
-			return false;
-		}
-
-		if (tags.length !== new Set(tags).size) {
-			errorMessage = 'Один и тот же хэш-тег не может быть использован дважды';
 			return false;
 		}
 
