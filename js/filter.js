@@ -15,15 +15,16 @@ const sortRandomly = () => Math.random() - 0.5;
 const sortByComments = (picA, picB) => picB.comments.length - picA.comments.length;
 
 const getFilteredPictures = async () => {
-	const data = await getData();
-	filtersWrapper.classList.remove('img-filters--inactive');
+	const photos = await getData();
+	const isPhotosReceived = photos && photos.length > 0;
+	filtersWrapper.classList.toggle('img-filters--inactive', !isPhotosReceived);
 	switch (currentFilter) {
 	case randomButton:
-		return [...data].sort(sortRandomly).slice(0, PICTURES_COUNT);
+		return [...photos].sort(sortRandomly).slice(0, PICTURES_COUNT);
 	case discussedButton:
-		return [...data].sort(sortByComments);
+		return [...photos].sort(sortByComments);
 	default:
-		return data;
+		return photos;
 	}
 };
 
@@ -54,4 +55,4 @@ filtersWrapper.addEventListener('click', async (evt) => {
 	await debouncedRenderThumbnails();
 });
 
-await updateRender();
+updateRender();

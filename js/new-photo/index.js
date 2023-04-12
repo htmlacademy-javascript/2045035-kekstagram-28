@@ -24,13 +24,11 @@ const onDocumentKeydown = (evt) => {
 	}
 };
 
-const loadNewPhotoForm = () => {
+uploadFile.addEventListener('change', () => {
 	toggleModalClasses(photoModal);
 	changePhoto(uploadFile);
 	document.addEventListener('keydown', onDocumentKeydown);
-};
-
-uploadFile.addEventListener('change', loadNewPhotoForm);
+});
 
 photoForm.addEventListener('reset', () => {
 	toggleModalClasses(photoModal, false);
@@ -55,6 +53,8 @@ photoForm.addEventListener('submit', (evt) => {
 				showSuccessMessage();
 			})
 			.catch(() => showErrorMessage())
-			.finally(submitButton.disabled = false);
+			.finally(() => {
+				submitButton.disabled = false;
+			});
 	}
 });

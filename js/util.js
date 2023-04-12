@@ -7,7 +7,7 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
  * @param {string} id
  * @returns {HTMLElement}
  */
-const getTemplate = (id) => document.getElementById(id).content.firstElementChild;
+const getTemplate = (id) => document.querySelector(`#${id}`).content.firstElementChild;
 
 /**
  * @param {Element} modalElement
